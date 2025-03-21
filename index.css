@@ -1,0 +1,43 @@
+:root{
+    --space : 10px
+}
+main{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+section{
+    margin-bottom: var(--space);
+    text-align: center;
+}
+@media only screen and (max-width: 1230px){
+    main{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+@media only screen and (max-width :960px) {
+    main{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media only screen and (max-width :640px) {
+    main{
+        grid-template-columns: 1fr;
+    }
+    section{
+        display: flex;
+        flex-direction: row;
+        gap: var(--space);
+    }
+    img{
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: contain;
+    }
+}
+@media only screen and (max-width :450px) {
+    img{
+        width: 100%;
+        aspect-ratio: 1/2;
+        object-fit: contain;
+    }
+}
