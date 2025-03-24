@@ -79,6 +79,7 @@ section{
         display: flex;
         flex-direction: row;
         gap: var(--space);
+        padding: var(--space);
     }
     img{
         width: 100%;
