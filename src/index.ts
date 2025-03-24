@@ -1,15 +1,18 @@
 import { product } from "../model/product"
 
-async function getProducts(){
-    const response = await fetch('https://dummyjson.com/products')
+async function getProducts(num:number){
+    const response = await fetch(`https://dummyjson.com/products?skip=${(num-1)*30}`)
     const data = await response.json()
-    console.log(data)
+
+    const mainSection = document.querySelector('.main')
+    if(mainSection?.hasChildNodes){
+        document.querySelector('.main-section')?.remove()
+    }
+    const mainDivElement =  document.createElement('div')
+    mainDivElement.className = 'main-section'
 
     data.products.forEach((product:product) => {
-
         //containers
-        const mainSection = document.querySelector('.main-section')
-
         const productSection = document.createElement('a')
         productSection.className = 'product-section'
         productSection.href = '#'
@@ -76,7 +79,13 @@ async function getProducts(){
         productInfoContainer.appendChild(cartBtnElement)
         productSection.appendChild(productImageContainer)
         productSection.appendChild(productInfoContainer)
-        mainSection?.appendChild(productSection)
+        mainDivElement?.appendChild(productSection)
+        mainSection?.appendChild(mainDivElement)
     });
 }
-getProducts()
+const paginationSection = document.querySelector('.pagination')!
+paginationSection.addEventListener('click',(event: Event)=>{
+    if(event.target instanceof HTMLButtonElement){
+        getProducts(Number(event.target.value))
+    }
+});
