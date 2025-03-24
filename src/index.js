@@ -51,8 +51,9 @@ function getProducts() {
                     data.products.forEach(function (product) {
                         //containers
                         var mainSection = document.querySelector('.main-section');
-                        var productSection = document.createElement('section');
+                        var productSection = document.createElement('a');
                         productSection.className = 'product-section';
+                        productSection.href = '#';
                         var productImageContainer = document.createElement('div');
                         productImageContainer.className = 'img-container';
                         var productInfoContainer = document.createElement('div');

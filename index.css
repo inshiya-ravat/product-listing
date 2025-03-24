@@ -1,27 +1,36 @@
 :root{
     --space : 20px;
     --padding: 5px;
+    --padding-btn: 10px;
     --shadow: 1px 2px 1px #CECECE;
     --large-font: 20px;
     --larger-font: 24px;
-    --small-font: 16px
+    --small-font: 16px;
     --grey: grey;
     --red: red;
     --yellow: #ffd814;
     --green: green;
+    --hover-grey: rgb(207, 206, 206);
 }
 p{
     margin: auto;
+}
+a{
+    text-decoration: none;
+    color: black;
 }
 main{
     display: grid;
     grid-template-columns: repeat(4,1fr);
 }
-section{
+.product-section{
     margin-bottom: var(--space);
     text-align: center;
     box-shadow: var(--shadow);
     padding-bottom: var(--space);
+}
+.product-section:hover{
+    background-color: var(--hover-grey);
 }
 .product-info{
     display: grid;
@@ -29,6 +38,10 @@ section{
 }
 .product-name{
     font-size: var(--large-font);
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }   
 .product-rating{
     display: flex;
@@ -59,7 +72,22 @@ section{
     background-color: var(--yellow);
     border: none;
     border-radius: 100px;
-    padding: var(--padding);
+    padding: var(--padding-btn);
+}
+.pagination{
+    display: flex;
+    flex-direction: row;
+}
+.pagination div{
+    margin: auto;
+}
+.pagination button{
+    background-color: white;
+    border: 1px solid black;
+    padding: var(--padding-btn);
+}
+.pagination button:hover{
+    background-color: var(--hover-grey);
 }
 @media only screen and (max-width: 1230px){
     main{

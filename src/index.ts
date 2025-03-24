@@ -10,8 +10,9 @@ async function getProducts(){
         //containers
         const mainSection = document.querySelector('.main-section')
 
-        const productSection = document.createElement('section')
+        const productSection = document.createElement('a')
         productSection.className = 'product-section'
+        productSection.href = '#'
 
         const productImageContainer = document.createElement('div')
         productImageContainer.className = 'img-container'
