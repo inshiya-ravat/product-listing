@@ -1,0 +1,124 @@
+:root {
+  --space: 20px;
+  --padding: 5px;
+  --padding-btn: 10px;
+  --shadow: 1px 2px 1px #cecece;
+  --large-font: 20px;
+  --larger-font: 24px;
+  --small-font: 16px;
+  --grey: grey;
+  --red: red;
+  --yellow: #ffd814;
+  --green: green;
+  --hover-grey: rgb(207, 206, 206);
+}
+p {
+  margin: auto;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.main-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.product-section {
+  margin-bottom: var(--space);
+  text-align: center;
+  box-shadow: var(--shadow);
+  padding-bottom: var(--space);
+}
+.product-section:hover {
+  background-color: var(--hover-grey);
+}
+.product-info {
+  display: grid;
+  grid-template-rows: 1fr repeat(5, 30px);
+}
+.product-name {
+  font-size: var(--large-font);
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-rating {
+  display: flex;
+  flex-direction: row;
+}
+.product-rating label {
+  font-weight: bold;
+  margin: auto 0 auto auto;
+}
+.product-reviews {
+  color: var(--grey);
+  margin: auto auto auto 0;
+}
+.stock-availability {
+  color: var(--red);
+}
+.product-price {
+  font-size: var(--larger-font);
+  font-weight: bold;
+}
+.discount {
+  color: var(--green);
+}
+.cart-btn {
+  width: fit-content;
+  margin: auto;
+  font-size: var(--small-font);
+  background-color: var(--yellow);
+  border: none;
+  border-radius: 100px;
+  padding: var(--padding-btn);
+}
+.pagination {
+  display: flex;
+  flex-direction: row;
+}
+.pagination div {
+  margin: auto;
+}
+.pagination button {
+  background-color: white;
+  border: 1px solid black;
+  padding: var(--padding-btn);
+}
+.pagination button:hover {
+  background-color: var(--hover-grey);
+}
+@media only screen and (max-width: 1230px) {
+  main {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (max-width: 960px) {
+  main {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (max-width: 640px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+  section {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space);
+    padding: var(--space);
+  }
+  img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+  }
+}
+@media only screen and (max-width: 450px) {
+  img {
+    width: 100%;
+    aspect-ratio: 1/2;
+    object-fit: contain;
+  }
+}
