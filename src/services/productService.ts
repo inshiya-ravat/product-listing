@@ -11,7 +11,7 @@ export class ProductService {
       return data.products;
     } catch (error) {
       if (error instanceof Error) {
-        alert(error.message);
+        throw error;
       }
     }
   }

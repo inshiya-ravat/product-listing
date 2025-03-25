@@ -1,10 +1,8 @@
 import { Product } from "../model/product";
-import { ProductService } from "../services/productService";
 import { createCustomLabel, getProductRating } from "../utility/utils";
 
 export class Productview {
   private products: Product[] = [];
-  private apiService: ProductService;
   private mainSection!: HTMLElement;
   private mainDivElement!: HTMLElement;
   private productSection!: HTMLAnchorElement;
@@ -21,13 +19,8 @@ export class Productview {
   private productDiscountElement!: HTMLParagraphElement;
   private cartBtnElement!: HTMLButtonElement;
 
-  constructor() {
-    this.apiService = new ProductService();
-    this.apiResponse(1);
-  }
-
-  async apiResponse(skipNum: number) {
-    this.products = await this.apiService.getProducts(skipNum);
+  async apiResponse(products: Product[]) {
+    this.products = products;
     this.mainSection = document.querySelector(".main")!;
     if (this.mainSection.hasChildNodes()) {
       document.querySelector(".main-section")?.remove();
@@ -136,7 +129,7 @@ export class Productview {
     this.mainSection?.appendChild(this.mainDivElement);
   }
 
-  private createElement(nameOfElement: string) {
+  private createElement(nameOfElement: keyof HTMLElementTagNameMap) {
     return document.createElement(nameOfElement);
   }
 
