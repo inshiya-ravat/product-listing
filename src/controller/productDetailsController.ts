@@ -1,0 +1,26 @@
+import { ProductDetailService } from "../services/productDetailsService";
+import { ProductDetailView } from "../view/productDetailsView";
+
+export class ProductDetailController {
+  view: ProductDetailView;
+  id: string;
+  apiService: ProductDetailService;
+  constructor(view: ProductDetailView) {
+    this.view = view;
+    this.apiService = new ProductDetailService();
+    this.id = new URLSearchParams(window.location.search).get("id")!;
+    this.fetchApiResponse(this.id);
+  }
+  async fetchApiResponse(id: string) {
+    try {
+      const productInfo = await this.apiService.getProductDetail(id);
+      if(productInfo !== undefined){
+        this.view.addElementsInDOM(productInfo)
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        return alert(error.message);
+      }
+    }
+  }
+}
