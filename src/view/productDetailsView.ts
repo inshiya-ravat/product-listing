@@ -179,7 +179,7 @@ export class ProductDetailView extends ClassUtils {
 
     const productRatingLabelElement = this.createElement(
       "label"
-    ) as HTMLLabelElement;
+    ) as HTMLFormElement;
     this.addClassName(productRatingLabelElement, "rating");
     this.addTextContent(
       productRatingLabelElement,
@@ -192,13 +192,14 @@ export class ProductDetailView extends ClassUtils {
     ) as HTMLInputElement;
     this.addInputElementAttributes(productRatingInputElement, [
       { property: "type", value: "range" },
-      { property: "id", value: "rating" },
+      { property: "id", value: `rating-${this.productDetails.id}` },
       { property: "disabled", value: "true" },
       {
         property: "value",
         value: getProductRating(this.productDetails.rating),
       },
     ]);
+    this.addForAttribute(productRatingLabelElement,`${productRatingInputElement.id}`);
     this.addAriaHidden(productRatingInputElement,true);
 
     const productReviewElement = this.createElement(
