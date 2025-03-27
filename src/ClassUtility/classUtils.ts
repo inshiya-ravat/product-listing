@@ -32,4 +32,8 @@ export class ClassUtils {
   protected addValueAttribute(element: HTMLButtonElement, str: string) {
     element.value = str;
   }
+
+  protected addIdAttribute(element:HTMLElement, str:string){
+    element.id = str;
+  }
 }

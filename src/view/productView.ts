@@ -20,6 +20,7 @@ export class Productview extends ClassUtils {
   private productDiscountElement!: HTMLParagraphElement;
   private cartBtnElement!: HTMLButtonElement;
   private noOfPages!: number;
+  private pageBtns: HTMLButtonElement[] = [];
   addElementsInDOM(products: Product[]) {
     this.products = products;
     this.mainSection = document.querySelector(".main")!;
@@ -137,17 +138,23 @@ export class Productview extends ClassUtils {
   addPageButtons(total: number, limit: number) {
     const buttons = document.getElementById("btns")!;
     this.noOfPages = total / limit;
-    const pageBtns = [];
     while (this.noOfPages >= 0) {
       const btn = this.createElement("button") as HTMLButtonElement;
       this.addClassName(btn, "pageBtn");
       this.addTextContent(btn, Math.ceil(this.noOfPages).toString());
       this.addValueAttribute(btn, Math.ceil(this.noOfPages).toString());
-      pageBtns.push(btn);
+      this.addIdAttribute(btn, `btn-${btn.value}`)
+      this.pageBtns.push(btn);
       this.noOfPages = this.noOfPages - 1;
     }
-    for (let i = pageBtns.length - 1; i >= 0; i--) {
-      buttons.appendChild(pageBtns[i]);
+    for (let i = this.pageBtns.length - 1; i >= 0; i--) {
+      buttons.appendChild(this.pageBtns[i]);
     }
+    this.pageBtns[this.pageBtns.length - 1].style.backgroundColor = "#e9ecef";
+    return this.pageBtns[this.pageBtns.length - 1].value;
+  }
+
+  getLastPageNumber() {
+    return this.pageBtns.length;
   }
 }
