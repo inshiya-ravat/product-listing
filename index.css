@@ -1,124 +1,175 @@
 :root {
   --space: 20px;
-  --padding: 5px;
-  --padding-btn: 10px;
-  --shadow: 1px 2px 1px #cecece;
-  --large-font: 20px;
-  --larger-font: 24px;
+  --padding: 8px;
+  --padding-btn: 12px;
+  --large-font: 22px;
+  --larger-font: 26px;
   --small-font: 16px;
   --grey: grey;
-  --red: red;
-  --yellow: #ffd814;
-  --green: green;
-  --hover-grey: rgb(207, 206, 206);
+  --red: #d9534f;
+  --yellow: #ffc107;
+  --golden:#e0a800;
+  --green: #28a745;
+  --hover-grey: #e9ecef;
+  --text-dark: #222;
+  --text-light: #555;
+  --border-radius: 8px;
 }
+ 
 p {
   margin: auto;
+  padding: 5px;
+  color: var(--text-dark);
 }
+ 
 a {
   text-decoration: none;
-  color: black;
 }
+ 
+a:hover {
+  color: darkblue;
+}
+
 .main-section {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space);
+  padding: var(--space);
 }
+ 
 .product-section {
-  margin-bottom: var(--space);
   text-align: center;
-  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
   padding-bottom: var(--space);
+  background: white;
 }
+ 
 .product-section:hover {
   background-color: var(--hover-grey);
 }
+ 
 .product-info {
   display: grid;
-  grid-template-rows: 1fr repeat(5, 30px);
+  grid-template-rows: 1fr repeat(5, auto);
+  padding: var(--padding);
 }
+ 
 .product-name {
   font-size: var(--large-font);
-  width: 200px;
+  width: 90%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: bold;
+  color: var(--text-dark);
+  margin: 10px auto;
 }
+ 
 .product-rating {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
+ 
 .product-rating label {
   font-weight: bold;
-  margin: auto 0 auto auto;
+  color: var(--green);
 }
+ 
 .product-reviews {
   color: var(--grey);
-  margin: auto auto auto 0;
+  font-size: var(--small-font);
 }
+ 
 .stock-availability {
   color: var(--red);
+  font-weight: bold;
 }
+ 
 .product-price {
   font-size: var(--larger-font);
   font-weight: bold;
 }
+ 
 .discount {
   color: var(--green);
+  font-size: var(--small-font);
+  font-weight: bold;
 }
+ 
 .cart-btn {
   width: fit-content;
   margin: auto;
   font-size: var(--small-font);
   background-color: var(--yellow);
   border: none;
-  border-radius: 100px;
-  padding: var(--padding-btn);
+  border-radius: 25px;
+  padding: var(--padding-btn) 20px;
+  font-weight: bold;
+  cursor: pointer;
 }
+ 
+.cart-btn:hover {
+  background-color: var(--golden);
+  transform: translateY(-2px);
+}
+ 
 .pagination {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  gap: var(--space);
+  margin-top: var(--space);
 }
-.pagination div {
-  margin: auto;
-}
+ 
 .pagination button {
   background-color: white;
   border: 1px solid black;
   padding: var(--padding-btn);
+  border-radius: var(--border-radius);
+  font-weight: bold;
 }
+ 
 .pagination button:hover {
   background-color: var(--hover-grey);
 }
+ 
 @media only screen and (max-width: 1230px) {
-  main {
+  .main-section {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+ 
 @media only screen and (max-width: 960px) {
-  main {
+  .main-section {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+ 
 @media only screen and (max-width: 640px) {
-  main {
+  .main-section {
     grid-template-columns: 1fr;
   }
+ 
   section {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     gap: var(--space);
     padding: var(--space);
   }
+ 
   img {
     width: 100%;
     aspect-ratio: 1/1;
     object-fit: contain;
+    border-radius: var(--border-radius);
   }
 }
+ 
 @media only screen and (max-width: 450px) {
   img {
-    width: 100%;
     aspect-ratio: 1/2;
-    object-fit: contain;
   }
 }

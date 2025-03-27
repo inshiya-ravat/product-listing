@@ -19,7 +19,7 @@ export class ProductController {
   async fetchApiResponse(skipNum: number) {
     try {
       this.products = await this.apiService.getProducts(skipNum);
-      this.view.apiResponse(this.products);
+      this.view.addElementsInDOM(this.products);
     } catch (error) {
       if (error instanceof Error) {
         return alert(error.message);

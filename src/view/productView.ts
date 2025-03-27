@@ -1,7 +1,8 @@
+import { ClassUtils } from "../ClassUtility/classUtils";
 import { Product } from "../model/product";
 import { createCustomLabel, getProductRating } from "../utility/utils";
 
-export class Productview {
+export class Productview extends ClassUtils{
   private products: Product[] = [];
   private mainSection!: HTMLElement;
   private mainDivElement!: HTMLElement;
@@ -19,7 +20,7 @@ export class Productview {
   private productDiscountElement!: HTMLParagraphElement;
   private cartBtnElement!: HTMLButtonElement;
 
-  async apiResponse(products: Product[]) {
+  addElementsInDOM(products: Product[]) {
     this.products = products;
     this.mainSection = document.querySelector(".main")!;
     if (this.mainSection.hasChildNodes()) {
@@ -34,7 +35,7 @@ export class Productview {
     this.products.forEach((product: Product) => {
       this.productSection = this.createElement("a") as HTMLAnchorElement;
       this.addClassName(this.productSection, "product-section");
-      this.addHrefAttribute(this.productSection, product.id.toString());
+      this.addHrefAttribute(this.productSection, `product?id=${product.id.toString()}`);
 
       this.productImageContainer = this.createElement("div");
       this.addClassName(this.productImageContainer, "img-container");
@@ -93,7 +94,8 @@ export class Productview {
         "p"
       ) as HTMLParagraphElement;
       this.addClassName(this.productPriceElement, "product-price");
-
+      this.addTextContent(this.productPriceElement,product.price.toString())
+      
       this.productDiscountElement = this.createElement(
         "p"
       ) as HTMLParagraphElement;
@@ -127,35 +129,5 @@ export class Productview {
     this.productSection.appendChild(this.productInfoContainer);
     this.mainDivElement?.appendChild(this.productSection);
     this.mainSection?.appendChild(this.mainDivElement);
-  }
-
-  private createElement(nameOfElement: keyof HTMLElementTagNameMap) {
-    return document.createElement(nameOfElement);
-  }
-
-  private addClassName(element: HTMLElement, elementClass: string) {
-    element.className = elementClass;
-  }
-
-  private addHrefAttribute(element: HTMLAnchorElement, hrefPath: string) {
-    element.href = hrefPath;
-  }
-
-  private addSrcAttribute(element: HTMLImageElement, src: string) {
-    element.src = src;
-  }
-
-  private addTextContent(element: HTMLElement, str: string) {
-    element.textContent = str;
-  }
-
-  private addInputElementAttributes(
-    element: HTMLInputElement,
-    arrAttributes: Array<{ property: string; value: string }>
-  ) {
-    arrAttributes.forEach((attribute) => {
-      const prop = attribute.property;
-      element.setAttribute(prop, attribute.value);
-    });
   }
 }

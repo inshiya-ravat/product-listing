@@ -1,8 +1,16 @@
 import { ProductController } from "./controller/productController";
 import { Productview } from "./view/productView";
-const productController = new ProductController(new Productview());
-document.addEventListener("DOMContentLoaded", () => productController);
-const paginationSection = document.querySelector(".pagination")!;
-paginationSection.addEventListener("click", (e: Event) => {
-  productController.pageClick(e);
+
+document.addEventListener("DOMContentLoaded", () => {
+  const productController = new ProductController(new Productview());
+  const mainSection = document.querySelector(".main")!;
+  mainSection.addEventListener("click",(e:Event)=>{
+    if(e.target instanceof HTMLButtonElement){
+      e.preventDefault()
+    }
+  })
+  const paginationSection = document.querySelector(".pagination")!;
+  paginationSection.addEventListener("click", (e: Event) => {
+    productController.pageClick(e);
+  });
 });
