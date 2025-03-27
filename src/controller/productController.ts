@@ -7,7 +7,7 @@ export class ProductController {
   view: Productview;
   private apiService: ProductService;
   private products: Product[] = [];
-  private currentPageValue:string ='1';
+  private currentPageValue: string = "1";
   constructor(view: Productview) {
     this.apiService = new ProductService();
     this.view = view;
@@ -24,17 +24,23 @@ export class ProductController {
           if (e.target.value === btn.value) {
             e.target.style.backgroundColor = "lightgray";
             this.currentPageValue = btn.value;
-            const nextEl = document.getElementById('next')! as HTMLButtonElement;
-            const prevEl = document.getElementById('prev')! as HTMLButtonElement;
-            if(this.currentPageValue === (this.view.getLastPageNumber()).toString()){
+            const nextEl = document.getElementById(
+              "next"
+            )! as HTMLButtonElement;
+            const prevEl = document.getElementById(
+              "prev"
+            )! as HTMLButtonElement;
+            if (
+              this.currentPageValue === this.view.getLastPageNumber().toString()
+            ) {
               nextEl.disabled = true;
-            }else{
-              nextEl.disabled=false;
+            } else {
+              nextEl.disabled = false;
             }
-            if(this.currentPageValue === '1'){
+            if (this.currentPageValue === "1") {
               prevEl.disabled = true;
-            }else{
-              prevEl.disabled=false;
+            } else {
+              prevEl.disabled = false;
             }
           } else {
             btn.style.backgroundColor = "inherit";
@@ -46,32 +52,32 @@ export class ProductController {
   }
   handleNextClicked(e: Event) {
     if (e.target instanceof HTMLButtonElement) {
-      const lastPage = this.view.getLastPageNumber()
-      if(this.currentPageValue === lastPage.toString()){
+      const lastPage = this.view.getLastPageNumber();
+      if (this.currentPageValue === lastPage.toString()) {
         e.target.disabled = true;
-      }else{
+      } else {
         e.target.disabled = false;
-        const prevEl = document.getElementById('prev')! as HTMLButtonElement;
+        const prevEl = document.getElementById("prev")! as HTMLButtonElement;
         prevEl.disabled = false;
         this.currentPageValue = (Number(this.currentPageValue) + 1).toString();
-        const el = document.getElementById(`btn-${this.currentPageValue}`)!
-        $(el).css('background-color','#e9ecef');
-        this.fetchApiResponse(Number(this.currentPageValue))
+        const el = document.getElementById(`btn-${this.currentPageValue}`)!;
+        $(el).css("background-color", "#e9ecef");
+        this.fetchApiResponse(Number(this.currentPageValue));
       }
     }
   }
   handlePrevClicked(e: Event) {
     if (e.target instanceof HTMLButtonElement) {
-      if(this.currentPageValue === '1'){
+      if (this.currentPageValue === "1") {
         e.target.disabled = true;
-      }else{
+      } else {
         e.target.disabled = false;
-        const nextEl = document.getElementById('next')! as HTMLButtonElement;
+        const nextEl = document.getElementById("next")! as HTMLButtonElement;
         nextEl.disabled = false;
         this.currentPageValue = (Number(this.currentPageValue) - 1).toString();
         const el = document.getElementById(`btn-${this.currentPageValue}`)!;
-        $(el).css('background-color','#e9ecef');
-        this.fetchApiResponse(Number(this.currentPageValue))
+        $(el).css("background-color", "#e9ecef");
+        this.fetchApiResponse(Number(this.currentPageValue));
       }
     }
   }

@@ -36,4 +36,12 @@ export class ClassUtils {
   protected addIdAttribute(element:HTMLElement, str:string){
     element.id = str;
   }
+
+  protected addAriaHidden(element:HTMLElement,str:boolean){
+    element.ariaHidden = str.toString();
+  }
+
+  protected addAriaLabel(element:HTMLElement,str:string){
+    element.ariaLabel = str;
+  }
 }

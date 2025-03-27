@@ -142,6 +142,7 @@ export class ProductDetailView extends ClassUtils {
     ) as HTMLButtonElement;
     this.addTextContent(this.decreaseQuantityBtnElement,'-');
     this.addClassName(this.decreaseQuantityBtnElement,'quantity-button');
+    this.addAriaLabel(this.decreaseQuantityBtnElement,`current quatity is ${this.productDetails.minimumOrderQuantity}; use this button to decrease the quatity`);
     this.quantityElement = this.createElement("p") as HTMLParagraphElement;
     this.addTextContent(this.quantityElement,this.productDetails.minimumOrderQuantity.toString())
     this.increaseQuantityBtnElement = this.createElement(
@@ -152,10 +153,12 @@ export class ProductDetailView extends ClassUtils {
     this.quantityContainer.appendChild(this.decreaseQuantityBtnElement);
     this.quantityContainer.appendChild(this.quantityElement);
     this.quantityContainer.appendChild(this.increaseQuantityBtnElement);
+    this.addAriaLabel(this.increaseQuantityBtnElement,`current quatity is ${this.productDetails.minimumOrderQuantity}; use this button to increase the quatity`);
     this.quantityAndCartContainer.appendChild(this.quantityContainer);
     this.cartBtnElement = this.createElement("button") as HTMLButtonElement;
-    this.addTextContent(this.cartBtnElement,'Add to Cart')
-    this.addClassName(this.cartBtnElement,'cart-btn')
+    this.addTextContent(this.cartBtnElement,'Add to Cart');
+    this.addClassName(this.cartBtnElement,'cart-btn');
+    this.addAriaLabel(this.cartBtnElement,'add this item to cart');
     this.quantityAndCartContainer.appendChild(this.cartBtnElement);
   }
   addTags() {
@@ -183,6 +186,7 @@ export class ProductDetailView extends ClassUtils {
       productRatingLabelElement,
       this.productDetails.rating.toString()
     );
+    this.addAriaLabel(productRatingLabelElement,`this product is rated ${this.productDetails.rating} out of 5`);
 
     const productRatingInputElement = this.createElement(
       "input"
@@ -196,6 +200,7 @@ export class ProductDetailView extends ClassUtils {
         value: getProductRating(this.productDetails.rating),
       },
     ]);
+    this.addAriaHidden(productRatingInputElement,true);
 
     const productReviewElement = this.createElement(
       "p"
@@ -205,6 +210,7 @@ export class ProductDetailView extends ClassUtils {
       productReviewElement,
       createCustomLabel(this.productDetails.reviews.length, ' reviews')
     );
+    this.addAriaHidden(productReviewElement,true);
 
     productRatingContainer.appendChild(productRatingLabelElement);
     productRatingContainer.appendChild(productRatingInputElement);
@@ -222,15 +228,16 @@ export class ProductDetailView extends ClassUtils {
 
       const reviewProfileContainer: HTMLElement = this.createElement("div");
       this.addClassName(reviewProfileContainer, "review-profile-container");
-
       const reviewInfoContainer: HTMLElement = this.createElement("div");
       this.addClassName(reviewInfoContainer, "reviewer-info");
 
       const reviewerName = this.createElement("p") as HTMLParagraphElement;
       this.addTextContent(reviewerName, review.reviewerName);
+      this.addAriaLabel(reviewerName,`review gven by ${review.reviewerName}}`)
 
       const reviewerEmail = this.createElement("p") as HTMLParagraphElement;
       this.addTextContent(reviewerEmail, review.reviewerEmail);
+      this.addAriaHidden(reviewerEmail,true);
 
       reviewInfoContainer.appendChild(reviewerName);
       reviewInfoContainer.appendChild(reviewerEmail);
@@ -241,9 +248,11 @@ export class ProductDetailView extends ClassUtils {
 
       const rating = this.createElement("p") as HTMLParagraphElement;
       this.addTextContent(rating, review.rating.toString());
+      this.addAriaHidden(rating,true);
 
       const date = this.createElement("p") as HTMLParagraphElement;
       this.addTextContent(date, review.date.toString());
+      this.addAriaHidden(date,true);
 
       reviewerRatingContainer.appendChild(rating);
       reviewerRatingContainer.appendChild(date);
