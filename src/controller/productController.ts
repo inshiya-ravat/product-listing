@@ -8,11 +8,24 @@ export class ProductController {
   private products: Product[] = [];
   constructor(view: Productview) {
     this.apiService = new ProductService();
-    this.fetchApiResponse(1);
     this.view = view;
+    this.fetchApiResponse(1);
+    this.addPagination();
   }
   async pageClick(e: Event) {
     if (e.target instanceof HTMLButtonElement) {
+      const btns = document.querySelectorAll(
+        ".pageBtn"
+      )! as NodeListOf<HTMLButtonElement>;
+      btns.forEach((btn) => {
+        if (e.target instanceof HTMLButtonElement) {
+          if (e.target.value === btn.value) {
+            e.target.style.backgroundColor = "lightgray";
+          } else {
+            btn.style.backgroundColor = "inherit";
+          }
+        }
+      });
       this.fetchApiResponse(Number(e.target.value));
     }
   }
@@ -25,5 +38,9 @@ export class ProductController {
         return alert(error.message);
       }
     }
+  }
+  async addPagination() {
+    await this.apiService.getLimitAndTotalPRoducts();
+    this.view.addPageButtons(this.apiService.total, this.apiService.limit);
   }
 }

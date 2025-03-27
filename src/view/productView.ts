@@ -2,7 +2,7 @@ import { ClassUtils } from "../ClassUtility/classUtils";
 import { Product } from "../model/product";
 import { createCustomLabel, getProductRating } from "../utility/utils";
 
-export class Productview extends ClassUtils{
+export class Productview extends ClassUtils {
   private products: Product[] = [];
   private mainSection!: HTMLElement;
   private mainDivElement!: HTMLElement;
@@ -19,7 +19,7 @@ export class Productview extends ClassUtils{
   private productPriceElement!: HTMLParagraphElement;
   private productDiscountElement!: HTMLParagraphElement;
   private cartBtnElement!: HTMLButtonElement;
-
+  private noOfPages!: number;
   addElementsInDOM(products: Product[]) {
     this.products = products;
     this.mainSection = document.querySelector(".main")!;
@@ -35,7 +35,10 @@ export class Productview extends ClassUtils{
     this.products.forEach((product: Product) => {
       this.productSection = this.createElement("a") as HTMLAnchorElement;
       this.addClassName(this.productSection, "product-section");
-      this.addHrefAttribute(this.productSection, `product?id=${product.id.toString()}`);
+      this.addHrefAttribute(
+        this.productSection,
+        `product?id=${product.id.toString()}`
+      );
 
       this.productImageContainer = this.createElement("div");
       this.addClassName(this.productImageContainer, "img-container");
@@ -94,8 +97,8 @@ export class Productview extends ClassUtils{
         "p"
       ) as HTMLParagraphElement;
       this.addClassName(this.productPriceElement, "product-price");
-      this.addTextContent(this.productPriceElement,product.price.toString())
-      
+      this.addTextContent(this.productPriceElement, product.price.toString());
+
       this.productDiscountElement = this.createElement(
         "p"
       ) as HTMLParagraphElement;
@@ -129,5 +132,22 @@ export class Productview extends ClassUtils{
     this.productSection.appendChild(this.productInfoContainer);
     this.mainDivElement?.appendChild(this.productSection);
     this.mainSection?.appendChild(this.mainDivElement);
+  }
+
+  addPageButtons(total: number, limit: number) {
+    const buttons = document.getElementById("btns")!;
+    this.noOfPages = total / limit;
+    const pageBtns = [];
+    while (this.noOfPages >= 0) {
+      const btn = this.createElement("button") as HTMLButtonElement;
+      this.addClassName(btn, "pageBtn");
+      this.addTextContent(btn, Math.ceil(this.noOfPages).toString());
+      this.addValueAttribute(btn, Math.ceil(this.noOfPages).toString());
+      pageBtns.push(btn);
+      this.noOfPages = this.noOfPages - 1;
+    }
+    for (let i = pageBtns.length - 1; i >= 0; i--) {
+      buttons.appendChild(pageBtns[i]);
+    }
   }
 }
