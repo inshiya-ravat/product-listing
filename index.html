@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./index.css"/>
-   
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+
     <title>Product-listing</title>
-</head>
-<body>
-    <main class="main">
-    </main>
+  </head>
+  <body>
+    <main class="main"></main>
     <section class="pagination">
-        <div>
-            <button value="1">1</button>
-            <button value="2">2</button>
-            <button value="3">3</button>
-            <button value="4">4</button>
-            <button value="5">5</button>
-            <button value="6">6</button>
-            <button value="7">7</button>
-        </div>
+      <div class="btns">
+        <button id="prev" disabled><</button>
+        <div id="btns"></div>
+        <button id="next">></button>
+      </div>
     </section>
-</body> <script type="module" src="./src/index.ts"></script>
+  </body>
+  <script type="module" src="./src/index.ts"></script>
 </html>

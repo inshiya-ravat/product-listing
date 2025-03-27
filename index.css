@@ -1,5 +1,6 @@
 :root {
   --space: 20px;
+  --gap: 10px;
   --padding: 8px;
   --padding-btn: 12px;
   --large-font: 22px;
@@ -7,25 +8,26 @@
   --small-font: 16px;
   --grey: grey;
   --red: #d9534f;
+  --light-yellow: #f8e9bb;
   --yellow: #ffc107;
-  --golden:#e0a800;
+  --golden: #e0a800;
   --green: #28a745;
   --hover-grey: #e9ecef;
   --text-dark: #222;
   --text-light: #555;
   --border-radius: 8px;
 }
- 
+
 p {
   margin: auto;
   padding: 5px;
   color: var(--text-dark);
 }
- 
+
 a {
   text-decoration: none;
 }
- 
+
 a:hover {
   color: darkblue;
 }
@@ -36,24 +38,24 @@ a:hover {
   gap: var(--space);
   padding: var(--space);
 }
- 
+
 .product-section {
   text-align: center;
   border-radius: var(--border-radius);
   padding-bottom: var(--space);
   background: white;
 }
- 
+
 .product-section:hover {
   background-color: var(--hover-grey);
 }
- 
+
 .product-info {
   display: grid;
   grid-template-rows: 1fr repeat(5, auto);
   padding: var(--padding);
 }
- 
+
 .product-name {
   font-size: var(--large-font);
   width: 90%;
@@ -64,7 +66,7 @@ a:hover {
   color: var(--text-dark);
   margin: 10px auto;
 }
- 
+
 .product-rating {
   display: flex;
   flex-direction: row;
@@ -72,33 +74,34 @@ a:hover {
   align-items: center;
   gap: 5px;
 }
- 
+
 .product-rating label {
   font-weight: bold;
   color: var(--green);
 }
- 
+
 .product-reviews {
   color: var(--grey);
   font-size: var(--small-font);
+  margin: 0;
 }
- 
+
 .stock-availability {
   color: var(--red);
   font-weight: bold;
 }
- 
+
 .product-price {
   font-size: var(--larger-font);
   font-weight: bold;
 }
- 
+
 .discount {
   color: var(--green);
   font-size: var(--small-font);
   font-weight: bold;
 }
- 
+
 .cart-btn {
   width: fit-content;
   margin: auto;
@@ -110,48 +113,69 @@ a:hover {
   font-weight: bold;
   cursor: pointer;
 }
- 
+
 .cart-btn:hover {
   background-color: var(--golden);
   transform: translateY(-2px);
 }
- 
+
 .pagination {
+  text-align: center;
+}
+
+.btns {
   display: flex;
   justify-content: center;
-  gap: var(--space);
+  gap: var(--gap);
   margin-top: var(--space);
 }
- 
-.pagination button {
+#btns{
+  display: flex;
+  justify-content: center;
+  gap: var(--gap);
+}
+.pageBtn, #next, #prev {
   background-color: white;
   border: 1px solid black;
   padding: var(--padding-btn);
   border-radius: var(--border-radius);
   font-weight: bold;
 }
- 
-.pagination button:hover {
+
+.pageBtn:hover, #prev:hover, #next:hover {
   background-color: var(--hover-grey);
 }
- 
+
+#next,
+#prev {
+  background-color: var(--light-yellow);
+}
+
+#next:disabled, #prev:disabled{
+  background-color: var(--hover-grey);
+}
+#next:hover:not(:disabled),
+#prev:hover:not(:disabled) {
+  background-color: var(--golden);
+}
+
 @media only screen and (max-width: 1230px) {
   .main-section {
     grid-template-columns: repeat(3, 1fr);
   }
 }
- 
+
 @media only screen and (max-width: 960px) {
   .main-section {
     grid-template-columns: repeat(2, 1fr);
   }
 }
- 
+
 @media only screen and (max-width: 640px) {
   .main-section {
     grid-template-columns: 1fr;
   }
- 
+
   section {
     display: flex;
     flex-direction: column;
@@ -159,7 +183,7 @@ a:hover {
     gap: var(--space);
     padding: var(--space);
   }
- 
+
   img {
     width: 100%;
     aspect-ratio: 1/1;
@@ -167,7 +191,7 @@ a:hover {
     border-radius: var(--border-radius);
   }
 }
- 
+
 @media only screen and (max-width: 450px) {
   img {
     aspect-ratio: 1/2;

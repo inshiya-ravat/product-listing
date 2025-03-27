@@ -28,4 +28,12 @@ export class ClassUtils {
       element.setAttribute(prop, attribute.value);
     });
   }
+
+  protected addValueAttribute(element: HTMLButtonElement, str: string) {
+    element.value = str;
+  }
+
+  protected addIdAttribute(element:HTMLElement, str:string){
+    element.id = str;
+  }
 }
