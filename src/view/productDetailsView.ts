@@ -26,6 +26,10 @@ export class ProductDetailView extends ClassUtils {
   quantityElement!: HTMLParagraphElement;
   increaseQuantityBtnElement!: HTMLButtonElement;
   cartBtnElement!: HTMLButtonElement;
+
+  /**
+   * @description adds elements in DOM
+   */
   addElementsInDOM(productDetails: ProductDetail) {
     this.productDetails = productDetails;
     this.mainSection = document.querySelector(".products-details-section")!;
@@ -34,6 +38,10 @@ export class ProductDetailView extends ClassUtils {
     this.addElementsInDetailsContainer();
     this.addElementsInQuantityAndCartContainer();
   }
+
+  /**
+   * @description add main containers in the parent
+   */
   addElementsInMainContainer() {
     this.imageContainer = this.createElement("section");
     this.detailContainer = this.createElement("main");
@@ -43,6 +51,10 @@ export class ProductDetailView extends ClassUtils {
     this.mainSection.appendChild(this.detailContainer);
     this.mainSection.appendChild(this.quantityAndCartContainer);
   }
+
+  /**
+   * @description adds elements inside image container
+   */
   addElementsInImageContainer() {
     this.productImageElement = this.createElement("img") as HTMLImageElement;
     this.addSrcAttribute(
@@ -53,6 +65,10 @@ export class ProductDetailView extends ClassUtils {
     this.addLoading(this.productImageElement,"lazy");
     this.imageContainer.appendChild(this.productImageElement);
   }
+
+  /**
+   * @description adds elements inside detail container consisting detail of a product
+   */
   addElementsInDetailsContainer() {
     this.productCategoryElement = this.createElement(
       "p"
@@ -136,6 +152,10 @@ export class ProductDetailView extends ClassUtils {
     this.detailContainer.appendChild(this.productReturnElement);
     this.detailContainer.appendChild(this.productReviewsContainer);
   }
+
+  /**
+   * @description adds elements for minimum quantity and cart button
+   */
   addElementsInQuantityAndCartContainer() {
     this.quantityContainer = this.createElement("div");
     this.decreaseQuantityBtnElement = this.createElement(
@@ -162,6 +182,10 @@ export class ProductDetailView extends ClassUtils {
     this.addAriaLabel(this.cartBtnElement,'add this item to cart');
     this.quantityAndCartContainer.appendChild(this.cartBtnElement);
   }
+  
+  /**
+   * @description add tags of a product
+   */
   addTags() {
     const productTagContainer: HTMLElement = this.createElement("div");
     this.addClassName(productTagContainer, "tags");
@@ -175,6 +199,10 @@ export class ProductDetailView extends ClassUtils {
     });
     return productTagContainer;
   }
+
+  /**
+   * @description adds rating container for a product
+   */
   addRatings() {
     const productRatingContainer: HTMLElement = this.createElement("div");
     this.addClassName(productRatingContainer, "product-rating");
@@ -220,6 +248,10 @@ export class ProductDetailView extends ClassUtils {
 
     return productRatingContainer;
   }
+
+  /**
+   * @description add review container for a product
+   */
   addReviews() {
     const reviewsContainer: HTMLElement = this.createElement("div");
     this.addClassName(reviewsContainer, "reviews");

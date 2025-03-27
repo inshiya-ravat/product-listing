@@ -21,6 +21,10 @@ export class Productview extends ClassUtils {
   private cartBtnElement!: HTMLButtonElement;
   private noOfPages!: number;
   private pageBtns: HTMLButtonElement[] = [];
+
+  /**
+   * @description add elements inside DOM
+   */
   addElementsInDOM(products: Product[]) {
     this.products = products;
     this.mainSection = document.querySelector(".main")!;
@@ -32,6 +36,9 @@ export class Productview extends ClassUtils {
     this.addElementsInMain();
   }
 
+  /**
+   * @description add main containers
+   */
   private addElementsInMain() {
     this.products.forEach((product: Product) => {
       this.productSection = this.createElement("a") as HTMLAnchorElement;
@@ -129,6 +136,9 @@ export class Productview extends ClassUtils {
     });
   }
 
+  /**
+   * @description appends child node into parent
+   */
   private appendChildInParentNode() {
     this.productImageContainer.appendChild(this.productImageElement);
     this.productRatingContainer.appendChild(this.productRatingLabelElement);
@@ -147,6 +157,9 @@ export class Productview extends ClassUtils {
     this.mainSection?.appendChild(this.mainDivElement);
   }
 
+  /**
+   * @description add button for pagination
+   */
   addPageButtons(total: number, limit: number) {
     const buttons = document.getElementById("btns")!;
     this.noOfPages = total / limit;
@@ -168,6 +181,9 @@ export class Productview extends ClassUtils {
     return this.pageBtns[this.pageBtns.length - 1].value;
   }
 
+  /**
+   * @description returns last page number
+   */
   getLastPageNumber() {
     return this.pageBtns.length;
   }
