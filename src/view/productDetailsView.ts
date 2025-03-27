@@ -1,4 +1,3 @@
-import { create } from "domain";
 import { ClassUtils } from "../ClassUtility/classUtils";
 import { ProductDetail } from "../model/productDetail";
 import { createCustomLabel, getProductRating } from "../utility/utils";

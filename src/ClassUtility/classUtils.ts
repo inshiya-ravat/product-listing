@@ -44,4 +44,8 @@ export class ClassUtils {
   protected addAriaLabel(element:HTMLElement,str:string){
     element.ariaLabel = str;
   }
+
+  protected addForAttribute(element:HTMLFormElement,str:string){
+    element.for = str;
+  }
 }
