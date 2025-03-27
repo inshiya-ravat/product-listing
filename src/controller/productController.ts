@@ -34,11 +34,13 @@ export class ProductController {
               this.currentPageValue === this.view.getLastPageNumber().toString()
             ) {
               nextEl.disabled = true;
+              e.target.style.cursor = "not-allowed";
             } else {
               nextEl.disabled = false;
             }
             if (this.currentPageValue === "1") {
               prevEl.disabled = true;
+              e.target.style.cursor = 'not-allowed';
             } else {
               prevEl.disabled = false;
             }
@@ -55,6 +57,7 @@ export class ProductController {
       const lastPage = this.view.getLastPageNumber();
       if (this.currentPageValue === lastPage.toString()) {
         e.target.disabled = true;
+        e.target.style.cursor = "not-allowed";
       } else {
         e.target.disabled = false;
         const prevEl = document.getElementById("prev")! as HTMLButtonElement;
@@ -70,6 +73,7 @@ export class ProductController {
     if (e.target instanceof HTMLButtonElement) {
       if (this.currentPageValue === "1") {
         e.target.disabled = true;
+        e.target.style.cursor = "not-allowed";
       } else {
         e.target.disabled = false;
         const nextEl = document.getElementById("next")! as HTMLButtonElement;

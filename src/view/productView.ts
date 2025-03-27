@@ -53,6 +53,8 @@ export class Productview extends ClassUtils {
       this.productImageElement = this.createElement("img") as HTMLImageElement;
       this.addSrcAttribute(this.productImageElement, product.thumbnail);
       this.addAriaHidden(this.productImageElement, true);
+      this.addAltAttribute(this.productImageElement,'product image');
+      this.addLoading(this.productImageElement,"lazy");
 
       this.productNameElement = this.createElement("p") as HTMLParagraphElement;
       this.addClassName(this.productNameElement, "product-name");
@@ -154,7 +156,8 @@ export class Productview extends ClassUtils {
       this.addTextContent(btn, Math.ceil(this.noOfPages).toString());
       this.addValueAttribute(btn, Math.ceil(this.noOfPages).toString());
       this.addIdAttribute(btn, `btn-${btn.value}`);
-      this.addAriaLabel(btn,`view products of page ${Math.ceil(this.noOfPages)}`)
+      this.addAriaLabel(btn,`view products of page ${Math.ceil(this.noOfPages)}`);
+      this.addCursorType(btn,'pointer');
       this.pageBtns.push(btn);
       this.noOfPages = this.noOfPages - 1;
     }
