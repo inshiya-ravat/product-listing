@@ -56,7 +56,7 @@ export class ProductController {
           }
         }
       });
-      this.fetchApiResponse(Number(e.target.value));
+      await this.fetchApiResponse(Number(e.target.value));
     }
   }
 
@@ -69,6 +69,7 @@ export class ProductController {
       if (Number(this.currentPageValue)+1 === lastPage) {
         e.target.disabled = true;
         e.target.style.cursor = "not-allowed";
+        
       } else {
         e.target.disabled = false;
         const prevEl = document.getElementById("prev")! as HTMLButtonElement;

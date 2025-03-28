@@ -61,7 +61,7 @@ export class ProductDetailView extends ClassUtils {
       this.productImageElement,
       this.productDetails.thumbnail
     );
-    this.addAltAttribute(this.productImageElement,'product image');
+    this.addAltAttribute(this.productImageElement,`${this.productDetails.title}`);
     this.addLoading(this.productImageElement,"lazy");
     this.imageContainer.appendChild(this.productImageElement);
   }

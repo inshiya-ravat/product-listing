@@ -60,7 +60,7 @@ export class Productview extends ClassUtils {
       this.productImageElement = this.createElement("img") as HTMLImageElement;
       this.addSrcAttribute(this.productImageElement, product.thumbnail);
       this.addAriaHidden(this.productImageElement, true);
-      this.addAltAttribute(this.productImageElement,'product image');
+      this.addAltAttribute(this.productImageElement,`${product.title}`);
       this.addLoading(this.productImageElement,"lazy");
 
       this.productNameElement = this.createElement("p") as HTMLParagraphElement;
