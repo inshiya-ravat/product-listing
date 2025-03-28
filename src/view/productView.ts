@@ -52,6 +52,9 @@ export class Productview extends ClassUtils {
 
       this.productImageElement = this.createElement("img") as HTMLImageElement;
       this.addSrcAttribute(this.productImageElement, product.thumbnail);
+      this.addAriaHidden(this.productImageElement, true);
+      this.addAltAttribute(this.productImageElement,`${product.title}`);
+      this.addLoading(this.productImageElement,"lazy");
 
       this.productNameElement = this.createElement("p") as HTMLParagraphElement;
       this.addClassName(this.productNameElement, "product-name");
@@ -65,6 +68,7 @@ export class Productview extends ClassUtils {
         this.productRatingLabelElement,
         product.rating.toString()
       );
+      this.addAriaHidden(this.productRatingLabelElement,true);
 
       this.productRatingInputElement = this.createElement(
         "input"
@@ -75,6 +79,7 @@ export class Productview extends ClassUtils {
         { property: "disabled", value: "true" },
         { property: "value", value: getProductRating(product.rating) },
       ]);
+      this.addAriaHidden(this.productRatingInputElement,true);
 
       this.productReviewElement = this.createElement(
         "p"
@@ -84,6 +89,7 @@ export class Productview extends ClassUtils {
         this.productReviewElement,
         product.reviews.length.toString()
       );
+      this.addAriaHidden(this.productReviewElement,true);
 
       this.stockAvailabilityElement = this.createElement(
         "p"
@@ -98,7 +104,11 @@ export class Productview extends ClassUtils {
         "p"
       ) as HTMLParagraphElement;
       this.addClassName(this.productPriceElement, "product-price");
-      this.addTextContent(this.productPriceElement, product.price.toString());
+      this.addTextContent(
+        this.productPriceElement,
+        createCustomLabel(product.price, "$")
+      );
+      this.addAriaLabel(this.productPriceElement, `price is ${product.price}`);
 
       this.productDiscountElement = this.createElement(
         "p"
@@ -108,10 +118,12 @@ export class Productview extends ClassUtils {
         this.productDiscountElement,
         createCustomLabel(product.discountPercentage, "% Off")
       );
+      this.addAriaLabel(this.productDiscountElement,`get ${product.discountPercentage} percentage off on buying this product`);
 
       this.cartBtnElement = this.createElement("button") as HTMLButtonElement;
       this.addClassName(this.cartBtnElement, "cart-btn");
       this.addTextContent(this.cartBtnElement, "Add to Cart");
+      this.addAriaLabel(this.cartBtnElement, "add item in cart");
 
       this.appendChildInParentNode();
     });
@@ -143,7 +155,9 @@ export class Productview extends ClassUtils {
       this.addClassName(btn, "pageBtn");
       this.addTextContent(btn, Math.ceil(this.noOfPages).toString());
       this.addValueAttribute(btn, Math.ceil(this.noOfPages).toString());
-      this.addIdAttribute(btn, `btn-${btn.value}`)
+      this.addIdAttribute(btn, `btn-${btn.value}`);
+      this.addAriaLabel(btn,`view products of page ${Math.ceil(this.noOfPages)}`);
+      this.addCursorType(btn,'pointer');
       this.pageBtns.push(btn);
       this.noOfPages = this.noOfPages - 1;
     }

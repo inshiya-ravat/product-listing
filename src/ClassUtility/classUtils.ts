@@ -1,3 +1,4 @@
+type Loading = "eager" | "lazy"
 export class ClassUtils {
   protected createElement(nameOfElement: keyof HTMLElementTagNameMap) {
     return document.createElement(nameOfElement);
@@ -35,5 +36,29 @@ export class ClassUtils {
 
   protected addIdAttribute(element:HTMLElement, str:string){
     element.id = str;
+  }
+
+  protected addAriaHidden(element:HTMLElement,str:boolean){
+    element.ariaHidden = str.toString();
+  }
+
+  protected addAriaLabel(element:HTMLElement,str:string){
+    element.ariaLabel = str;
+  }
+
+  protected addForAttribute(element:HTMLFormElement,str:string){
+    element.for = str;
+  }
+
+  protected addAltAttribute(element:HTMLImageElement,str:string){
+    element.alt = str;
+  }
+
+  protected addLoading(element:HTMLImageElement, str:Loading){
+    element.loading = str;
+  }
+
+  protected addCursorType(element:HTMLButtonElement,str:string){
+    element.style.cursor = str;
   }
 }

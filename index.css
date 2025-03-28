@@ -129,12 +129,14 @@ a:hover {
   gap: var(--gap);
   margin-top: var(--space);
 }
-#btns{
+#btns {
   display: flex;
   justify-content: center;
   gap: var(--gap);
 }
-.pageBtn, #next, #prev {
+.pageBtn,
+#next,
+#prev {
   background-color: white;
   border: 1px solid black;
   padding: var(--padding-btn);
@@ -142,16 +144,20 @@ a:hover {
   font-weight: bold;
 }
 
-.pageBtn:hover, #prev:hover, #next:hover {
+.pageBtn:hover,
+#prev:hover,
+#next:hover {
   background-color: var(--hover-grey);
 }
 
 #next,
 #prev {
   background-color: var(--light-yellow);
+  cursor: pointer;
 }
 
-#next:disabled, #prev:disabled{
+#next:disabled,
+#prev:disabled {
   background-color: var(--hover-grey);
 }
 #next:hover:not(:disabled),
