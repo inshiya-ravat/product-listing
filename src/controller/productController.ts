@@ -63,41 +63,41 @@ export class ProductController {
   /**
    * @description handles next button click event. Fetches api response for next page
    */
-  handleNextClicked(e: Event) {
+  async handleNextClicked(e: Event) {
     if (e.target instanceof HTMLButtonElement) {
       const lastPage = this.view.getLastPageNumber();
-      if (this.currentPageValue === lastPage.toString()) {
+      if (Number(this.currentPageValue)+1 === lastPage) {
         e.target.disabled = true;
         e.target.style.cursor = "not-allowed";
       } else {
         e.target.disabled = false;
         const prevEl = document.getElementById("prev")! as HTMLButtonElement;
         prevEl.disabled = false;
-        this.currentPageValue = (Number(this.currentPageValue) + 1).toString();
-        const el = document.getElementById(`btn-${this.currentPageValue}`)!;
-        $(el).css('abckground-color','#e9ecef');
-        this.fetchApiResponse(Number(this.currentPageValue));
       }
+      this.currentPageValue = (Number(this.currentPageValue) + 1).toString();
+      const el = document.getElementById(`btn-${this.currentPageValue}`)!;
+      await this.fetchApiResponse(Number(this.currentPageValue));
+      $(el).css('background-color','#e9ecef');
     }
   }
 
   /**
    * @description handles previous button click event. Fetches api repsonse for previous page.
    */
-  handlePrevClicked(e: Event) {
+  async handlePrevClicked(e: Event) {
     if (e.target instanceof HTMLButtonElement) {
-      if (this.currentPageValue === "1") {
+      if (Number(this.currentPageValue) -1 === 1) {
         e.target.disabled = true;
         e.target.style.cursor = "not-allowed";
       } else {
         e.target.disabled = false;
         const nextEl = document.getElementById("next")! as HTMLButtonElement;
         nextEl.disabled = false;
-        this.currentPageValue = (Number(this.currentPageValue) - 1).toString();
-        const el = document.getElementById(`btn-${this.currentPageValue}`)!;
-        $(el).css("background-color", "#e9ecef");
-        this.fetchApiResponse(Number(this.currentPageValue));
       }
+      this.currentPageValue = (Number(this.currentPageValue) - 1).toString();
+      const el = document.getElementById(`btn-${this.currentPageValue}`)!;
+      await this.fetchApiResponse(Number(this.currentPageValue));
+      $(el).css("background-color", "#e9ecef");
     }
   }
 

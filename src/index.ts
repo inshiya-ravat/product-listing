@@ -17,4 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
   nextbutton.addEventListener("click", (e: Event) => {
     productController.handleNextClicked(e);
   });
+  const prevButton = document.getElementById("prev")!;
+  prevButton.addEventListener("click", (e: Event) => {
+    productController.handlePrevClicked(e);
+  });
 });
