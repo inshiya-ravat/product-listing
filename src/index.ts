@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
     }
   });
-  const paginationSection = document.querySelector(".pagination")!;
+  const paginationSection = document.getElementById("btns")!;
   paginationSection.addEventListener("click", (e: Event) => {
     productController.pageClick(e);
   });
