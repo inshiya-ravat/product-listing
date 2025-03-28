@@ -159,7 +159,7 @@ a:hover {
 #next:disabled,
 #prev:disabled {
   background-color: var(--hover-grey);
-  cursor: 'not-allowed';
+  cursor:not-allowed;
 }
 #next:hover:not(:disabled),
 #prev:hover:not(:disabled) {

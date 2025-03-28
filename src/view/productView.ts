@@ -1,7 +1,8 @@
 import { ClassUtils } from "../ClassUtility/classUtils";
 import { Product } from "../model/product";
-import { createCustomLabel, getProductRating } from "../utility/utils";
+import { $, createCustomLabel, getProductRating } from "../utility/utils";
 
+type BtnType = "prev" | "next";
 export class Productview extends ClassUtils {
   private products: Product[] = [];
   private mainSection!: HTMLElement;
@@ -60,8 +61,8 @@ export class Productview extends ClassUtils {
       this.productImageElement = this.createElement("img") as HTMLImageElement;
       this.addSrcAttribute(this.productImageElement, product.thumbnail);
       this.addAriaHidden(this.productImageElement, true);
-      this.addAltAttribute(this.productImageElement,`${product.title}`);
-      this.addLoading(this.productImageElement,"lazy");
+      this.addAltAttribute(this.productImageElement, `${product.title}`);
+      this.addLoading(this.productImageElement, "lazy");
 
       this.productNameElement = this.createElement("p") as HTMLParagraphElement;
       this.addClassName(this.productNameElement, "product-name");
@@ -75,8 +76,8 @@ export class Productview extends ClassUtils {
         this.productRatingLabelElement,
         product.rating.toString()
       );
-      this.addAriaHidden(this.productRatingLabelElement,true);
-      
+      this.addAriaHidden(this.productRatingLabelElement, true);
+
       this.productRatingInputElement = this.createElement(
         "input"
       ) as HTMLInputElement;
@@ -86,9 +87,15 @@ export class Productview extends ClassUtils {
         { property: "disabled", value: "true" },
         { property: "value", value: getProductRating(product.rating) },
       ]);
-      this.addIdAttribute(this.productRatingInputElement,`rating-${product.id}`)
-      this.addForAttribute(this.productRatingLabelElement,`${this.productRatingInputElement.id}`);
-      this.addAriaHidden(this.productRatingInputElement,true);
+      this.addIdAttribute(
+        this.productRatingInputElement,
+        `rating-${product.id}`
+      );
+      this.addForAttribute(
+        this.productRatingLabelElement,
+        `${this.productRatingInputElement.id}`
+      );
+      this.addAriaHidden(this.productRatingInputElement, true);
 
       this.productReviewElement = this.createElement(
         "p"
@@ -98,7 +105,7 @@ export class Productview extends ClassUtils {
         this.productReviewElement,
         product.reviews.length.toString()
       );
-      this.addAriaHidden(this.productReviewElement,true);
+      this.addAriaHidden(this.productReviewElement, true);
 
       this.stockAvailabilityElement = this.createElement(
         "p"
@@ -127,7 +134,10 @@ export class Productview extends ClassUtils {
         this.productDiscountElement,
         createCustomLabel(product.discountPercentage, "% Off")
       );
-      this.addAriaLabel(this.productDiscountElement,`get ${product.discountPercentage} percentage off on buying this product`);
+      this.addAriaLabel(
+        this.productDiscountElement,
+        `get ${product.discountPercentage} percentage off on buying this product`
+      );
 
       this.cartBtnElement = this.createElement("button") as HTMLButtonElement;
       this.addClassName(this.cartBtnElement, "cart-btn");
@@ -171,8 +181,11 @@ export class Productview extends ClassUtils {
       this.addTextContent(btn, Math.ceil(this.noOfPages).toString());
       this.addValueAttribute(btn, Math.ceil(this.noOfPages).toString());
       this.addIdAttribute(btn, `btn-${btn.value}`);
-      this.addAriaLabel(btn,`view products of page ${Math.ceil(this.noOfPages)}`);
-      this.addCursorType(btn,'pointer');
+      this.addAriaLabel(
+        btn,
+        `view products of page ${Math.ceil(this.noOfPages)}`
+      );
+      this.addCursorType(btn, "pointer");
       this.pageBtns.push(btn);
       this.noOfPages = this.noOfPages - 1;
     }
@@ -188,5 +201,95 @@ export class Productview extends ClassUtils {
    */
   getLastPageNumber() {
     return this.pageBtns.length;
+  }
+
+  /**
+   * @description changes styles for currently selected page and 
+   * change disable propert for next previous button if needed 
+   */
+  handlePageClick(e: Event): string {
+    const btns = document.querySelectorAll(
+      ".pageBtn"
+    )! as NodeListOf<HTMLButtonElement>;
+    let currentPage: string;
+    btns.forEach((btn) => {
+      if (e.target instanceof HTMLButtonElement) {
+        if (e.target.value === btn.value) {
+          e.target.style.backgroundColor = "lightgray";
+          currentPage = btn.value;
+          const nextEl = document.getElementById("next")! as HTMLButtonElement;
+          const prevEl = document.getElementById("prev")! as HTMLButtonElement;
+          if (currentPage === this.getLastPageNumber().toString()) {
+            nextEl.disabled = true;
+          } else {
+            nextEl.disabled = false;
+          }
+          if (currentPage === "1") {
+            prevEl.disabled = true;
+          } else {
+            prevEl.disabled = false;
+          }
+        } else {
+          btn.style.backgroundColor = "inherit";
+        }
+      }
+    });
+    return currentPage;
+  }
+
+  /**
+   * @description add disable styles for next or previous page if needed
+   */
+  handleDisableStyle(type: BtnType, currentPage: number, e: Event) {
+    if (e.target instanceof HTMLButtonElement) {
+      switch (type) {
+        case "prev": {
+          if (Number(currentPage) - 1 === 1) {
+            e.target.disabled = true;
+          } else {
+            e.target.disabled = false;
+            const nextEl = document.getElementById(
+              "next"
+            )! as HTMLButtonElement;
+            nextEl.disabled = false;
+          }
+          break;
+        }
+        case "next": {
+          const lastPage = this.getLastPageNumber();
+          if (currentPage + 1 === lastPage) {
+            e.target.disabled = true;
+          } else {
+            e.target.disabled = false;
+            const prevEl = document.getElementById(
+              "prev"
+            )! as HTMLButtonElement;
+            prevEl.disabled = false;
+          }
+          break;
+        }
+      }
+    }
+  }
+
+  /**
+   * @description add background styles for current page and change 
+   * style for next or previous element
+   */
+  handleBackgroundStyle(type: BtnType, currentPage: number) {
+    const el = document.getElementById(`btn-${currentPage}`)!;
+    $(el).css("background-color", "#e9ecef");
+    switch (type) {
+      case "prev": {
+        const nextEl = document.getElementById(`btn-${currentPage + 1}`)!;
+        $(nextEl).css("background-color", "white");
+        break;
+      }
+      case "next": {
+        const prevEl = document.getElementById(`btn-${currentPage - 1}`)!;
+        $(prevEl).css("background-color", "white");
+        break;
+      }
+    }
   }
 }
