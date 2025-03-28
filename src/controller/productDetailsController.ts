@@ -11,6 +11,10 @@ export class ProductDetailController {
     this.id = new URLSearchParams(window.location.search).get("id")!;
     this.fetchApiResponse(this.id);
   }
+  
+  /**
+   * @description fethced detail information of a product vis service object.
+   */
   async fetchApiResponse(id: string) {
     try {
       const productInfo = await this.apiService.getProductDetail(id);

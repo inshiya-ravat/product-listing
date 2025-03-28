@@ -3,6 +3,9 @@ import { ERROR } from "../constant";
 export class ProductService {
   limit: number = 0;
   total: number = 0;
+  /**
+   * @description fetch api response for product list
+   */
   async getProducts(pageNum: number) {
     try {
       const response = await fetch(
@@ -19,6 +22,10 @@ export class ProductService {
       }
     }
   }
+
+  /**
+   * @description fetch api response for limit and total number of products recieved in an api call.
+   */
   async getLimitAndTotalPRoducts() {
     try {
       const response = await fetch("https://dummyjson.com/products");

@@ -2,6 +2,9 @@ import { ERROR } from "../constant";
 import { ProductDetail } from "../model/productDetail";
 
 export class ProductDetailService {
+  /**
+   * @description fetch api response for detail information of a product.
+   */
   async getProductDetail(id: string) {
     try {
       const response = await fetch(`https://dummyjson.com/products/${id}`);
