@@ -12,7 +12,7 @@ export class Productview extends ClassUtils {
   private productRatingContainer!: HTMLElement;
   private productImageElement!: HTMLImageElement;
   private productNameElement!: HTMLParagraphElement;
-  private productRatingLabelElement!: HTMLLabelElement;
+  private productRatingLabelElement!: HTMLFormElement;
   private productRatingInputElement!: HTMLInputElement;
   private productReviewElement!: HTMLParagraphElement;
   private stockAvailabilityElement!: HTMLParagraphElement;
@@ -62,14 +62,14 @@ export class Productview extends ClassUtils {
 
       this.productRatingLabelElement = this.createElement(
         "label"
-      ) as HTMLLabelElement;
+      ) as HTMLFormElement;
       this.addClassName(this.productRatingLabelElement, "rating");
       this.addTextContent(
         this.productRatingLabelElement,
         product.rating.toString()
       );
       this.addAriaHidden(this.productRatingLabelElement,true);
-
+      
       this.productRatingInputElement = this.createElement(
         "input"
       ) as HTMLInputElement;
@@ -79,6 +79,8 @@ export class Productview extends ClassUtils {
         { property: "disabled", value: "true" },
         { property: "value", value: getProductRating(product.rating) },
       ]);
+      this.addIdAttribute(this.productRatingInputElement,`rating-${product.id}`)
+      this.addForAttribute(this.productRatingLabelElement,`${this.productRatingInputElement.id}`);
       this.addAriaHidden(this.productRatingInputElement,true);
 
       this.productReviewElement = this.createElement(
